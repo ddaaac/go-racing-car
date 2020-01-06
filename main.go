@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "./IO"
 
 func main() {
-	fmt.Println("Hello World")
+	IO.GetCarsName()
 }
