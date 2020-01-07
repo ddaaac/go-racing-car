@@ -3,14 +3,12 @@ package IO
 import (
 	"../Exception"
 	"bufio"
-	"fmt"
 	"os"
 	"strings"
 )
 
 const newLineByte = '\n'
 const newLineString = "\n"
-const separator = ","
 
 var reader *bufio.Reader
 
@@ -19,15 +17,14 @@ func init() {
 }
 
 func GetCarsName() []string {
-	fmt.Println("차이름을 입력해주세요")
-	carsName, _ := reader.ReadString(newLineByte)
-	carsName = strings.TrimSuffix(carsName, newLineString)
-	err := Exception.ValidateCarsName(carsName)
+	question := "차이름을 입력해주세요"
+	carsName := getInput(question)
+	carsNameArray, err := Exception.ValidateCarsName(carsName)
 	if err != nil {
 		PrintError(err)
 		return GetCarsName()
 	}
-	return strings.Split(carsName, separator)
+	return carsNameArray
 }
 
 func GetTryNumber() int {
@@ -46,4 +43,3 @@ func getInput(question string) string {
 	input, _ := reader.ReadString(newLineByte)
 	return strings.TrimSuffix(input, newLineString)
 }
-

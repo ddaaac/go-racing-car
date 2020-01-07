@@ -12,18 +12,19 @@ const alphabetEnd = 'z'
 const zero = 0
 const intError = -1
 
-func ValidateCarsName(carsName string) error {
-	for _, carName := range strings.Split(carsName, separator) {
+func ValidateCarsName(carsName string) ([]string, error) {
+	carsNameArray := strings.Split(carsName, separator)
+	for _, carName := range carsNameArray {
 		err := validateCarName(carName)
-		if err != noError {
-			return err
+		if err != nil {
+			return nil, err
 		}
 	}
-	return noError
+	return carsNameArray, nil
 }
 
 func ValidateTryNumber(tryNumber string) (int, error) {
-	intNumber, isPositiveInt := validatePositiveInt(tryNumber)
+	intNumber, isPositiveInt := stringToPositiveInt(tryNumber)
 	if !isPositiveInt {
 		return intError, notPositiveIntegerError
 	}
@@ -35,22 +36,21 @@ func validateCarName(carName string) error {
 		return emptyCarNameError
 	}
 	for _, letter := range strings.ToLower(carName) {
-		err := validateCarLetter(letter)
-		if err != noError {
-			return err
+		if !isAlphabet(letter) {
+			return notAlphabetLetterError
 		}
 	}
-	return noError
+	return nil
 }
 
-func validateCarLetter(carLetter rune) error {
-	if carLetter >= alphabetStart && carLetter <= alphabetEnd {
-		return noError
+func isAlphabet(carLetter rune) bool {
+	if carLetter < alphabetStart || carLetter > alphabetEnd {
+		return false
 	}
-	return notAlphabetLetterError
+	return true
 }
 
-func validatePositiveInt(stringNumber string) (int, bool) {
+func stringToPositiveInt(stringNumber string) (int, bool) {
 	intNumber, err := strconv.Atoi(stringNumber)
 	if err != nil || intNumber <= zero {
 		return intError, false
