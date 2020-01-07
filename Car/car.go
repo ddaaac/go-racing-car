@@ -1,11 +1,14 @@
 package Car
 
-import "../Util"
+import (
+	"../Util"
+)
 
 const initialPosition = 0
 const minRandomValue = 0
 const maxRandomValue = 9
 const thresholdMoveForward = 4
+const dash = "-"
 
 var cars []*Car
 
@@ -29,6 +32,14 @@ func CarsMoveForward() []*Car {
 		car.moveForward()
 	}
 	return cars
+}
+
+func (car Car) String() string {
+	var moveForwardDash string
+	for i := 0; i < car.position; i++ {
+		moveForwardDash += dash
+	}
+	return car.name + ": " + moveForwardDash
 }
 
 func newCar(name string) *Car {
