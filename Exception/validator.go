@@ -1,20 +1,31 @@
 package Exception
 
 import (
+	"../Util"
 	"strings"
 )
 
 const separator = ","
 const empty = ""
+const intError = -1
 
-func ValidateCarsName(carsName string) error {
-	for _, carName := range strings.Split(carsName, separator) {
+func ValidateCarsName(carsName string) ([]string, error) {
+	carsNameArray := strings.Split(carsName, separator)
+	for _, carName := range carsNameArray {
 		err := validateCarName(carName)
-		if err != noError {
-			return err
+		if err != nil {
+			return nil, err
 		}
 	}
-	return noError
+	return carsNameArray, nil
+}
+
+func ValidateTryNumber(tryNumber string) (int, error) {
+	intNumber, isPositiveInt := Util.StringToPositiveInt(tryNumber)
+	if !isPositiveInt {
+		return intError, notPositiveIntegerError
+	}
+	return intNumber, nil
 }
 
 func validateCarName(carName string) error {
@@ -22,17 +33,9 @@ func validateCarName(carName string) error {
 		return emptyCarNameError
 	}
 	for _, letter := range strings.ToLower(carName) {
-		err := validateCarLetter(letter)
-		if err != noError {
-			return err
+		if !Util.IsAlphabet(letter) {
+			return notAlphabetLetterError
 		}
 	}
-	return noError
-}
-
-func validateCarLetter(carLetter rune) error {
-	if carLetter > 'a' && carLetter < 'z' {
-		return noError
-	}
-	return notAlphabetLetterError
+	return nil
 }

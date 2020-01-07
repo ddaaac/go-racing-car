@@ -1,7 +1,15 @@
 package main
 
-import "./IO"
+import (
+	"./Car"
+	"./IO"
+)
 
 func main() {
-	IO.GetCarsName()
+	Car.NewCars(IO.GetCarsName())
+	tryNumber := IO.GetTryNumber()
+	for i := 0; i < tryNumber; i++ {
+		IO.PrintCarsPosition(Car.CarsMoveForward())
+	}
+	IO.PrintWinnersName(Car.GetWinnersName())
 }
