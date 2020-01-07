@@ -45,3 +45,17 @@ func canMoveForward() bool {
 	}
 	return true
 }
+
+func (car Car) comparePosition(position int) int {
+	if car.position > position {
+		return car.position
+	}
+	return position
+}
+
+func (car Car) ifAtThePosition(position int) bool {
+	if car.position == position {
+		return true
+	}
+	return false
+}

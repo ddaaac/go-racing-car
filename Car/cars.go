@@ -18,3 +18,22 @@ func CarsMoveForward() []*Car {
 	}
 	return cars
 }
+
+func GetWinnersName() []string {
+	var winnersName []string
+	winnerPosition := getWinnerPosition()
+	for _, car := range cars {
+		if car.ifAtThePosition(winnerPosition) {
+			winnersName = append(winnersName, car.String())
+		}
+	}
+	return winnersName
+}
+
+func getWinnerPosition() int {
+	winnerPosition := initialPosition
+	for _, car := range cars {
+		winnerPosition = car.comparePosition(winnerPosition)
+	}
+	return winnerPosition
+}
