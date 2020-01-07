@@ -1,7 +1,10 @@
 package main
 
-import "./IO"
+import (
+	"./Car"
+	"./IO"
+)
 
 func main() {
-	IO.GetCarsName()
+	Car.NewCars(IO.GetCarsName())
 }
