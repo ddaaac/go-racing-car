@@ -30,3 +30,20 @@ func GetCarsName() []string {
 	return strings.Split(carsName, separator)
 }
 
+func GetTryNumber() int {
+	question := "시도할 횟수를 입력해주세요"
+	tryNumberString := getInput(question)
+	tryNumber, err := Exception.ValidateTryNumber(tryNumberString)
+	if err != nil {
+		PrintError(err)
+		return GetTryNumber()
+	}
+	return tryNumber
+}
+
+func getInput(question string) string {
+	PrintLine(question)
+	input, _ := reader.ReadString(newLineByte)
+	return strings.TrimSuffix(input, newLineString)
+}
+
