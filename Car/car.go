@@ -47,7 +47,7 @@ func newCar(name string) *Car {
 	return &newCar
 }
 
-func (car Car) moveForward() {
+func (car *Car) moveForward() {
 	if canMoveForward() {
 		car.position++
 	}
