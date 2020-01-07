@@ -18,5 +18,6 @@ func PrintCarsPosition(cars []*Car.Car) {
 }
 
 func printCarPosition(car *Car.Car) {
-	fmt.Println(car)
+	fmt.Print(car)
+	fmt.Println(": " + car.GetDashLine())
 }

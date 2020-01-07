@@ -21,11 +21,15 @@ func newCar(name string) *Car {
 }
 
 func (car Car) String() string {
+	return car.name
+}
+
+func (car Car) GetDashLine() string {
 	var moveForwardDash string
 	for i := 0; i < car.position; i++ {
 		moveForwardDash += dash
 	}
-	return car.name + ": " + moveForwardDash
+	return moveForwardDash
 }
 
 func (car *Car) moveForward() {
