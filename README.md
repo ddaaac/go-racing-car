@@ -1,4 +1,4 @@
-#Go로 작성하는 racing-car
+# Go로 작성하는 racing-car
 
 ## Business logic
 - [x] 입력받은 이름으로 자동차 객체를 만드는 기능
