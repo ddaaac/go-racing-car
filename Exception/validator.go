@@ -6,6 +6,8 @@ import (
 
 const separator = ","
 const empty = ""
+const alphabetStart = 'a'
+const alphabetEnd = 'z'
 
 func ValidateCarsName(carsName string) error {
 	for _, carName := range strings.Split(carsName, separator) {
@@ -31,7 +33,7 @@ func validateCarName(carName string) error {
 }
 
 func validateCarLetter(carLetter rune) error {
-	if carLetter > 'a' && carLetter < 'z' {
+	if carLetter >= alphabetStart && carLetter <= alphabetEnd {
 		return noError
 	}
 	return notAlphabetLetterError
