@@ -1,15 +1,12 @@
 package Exception
 
 import (
-	"strconv"
+	"../Util"
 	"strings"
 )
 
 const separator = ","
 const empty = ""
-const alphabetStart = 'a'
-const alphabetEnd = 'z'
-const zero = 0
 const intError = -1
 
 func ValidateCarsName(carsName string) ([]string, error) {
@@ -24,7 +21,7 @@ func ValidateCarsName(carsName string) ([]string, error) {
 }
 
 func ValidateTryNumber(tryNumber string) (int, error) {
-	intNumber, isPositiveInt := stringToPositiveInt(tryNumber)
+	intNumber, isPositiveInt := Util.StringToPositiveInt(tryNumber)
 	if !isPositiveInt {
 		return intError, notPositiveIntegerError
 	}
@@ -36,24 +33,9 @@ func validateCarName(carName string) error {
 		return emptyCarNameError
 	}
 	for _, letter := range strings.ToLower(carName) {
-		if !isAlphabet(letter) {
+		if !Util.IsAlphabet(letter) {
 			return notAlphabetLetterError
 		}
 	}
 	return nil
-}
-
-func isAlphabet(carLetter rune) bool {
-	if carLetter < alphabetStart || carLetter > alphabetEnd {
-		return false
-	}
-	return true
-}
-
-func stringToPositiveInt(stringNumber string) (int, bool) {
-	intNumber, err := strconv.Atoi(stringNumber)
-	if err != nil || intNumber <= zero {
-		return intError, false
-	}
-	return intNumber, true
 }
